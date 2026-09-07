@@ -1,0 +1,76 @@
+---
+// Pon el ID de tu formulario en .env como PUBLIC_TALLY_ID=xxxxxx
+const idTally = import.meta.env.PUBLIC_TALLY_ID ?? '';
+const src = `https://tally.so/embed/${idTally}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+---
+
+<section class="section boletin" id="newsletter">
+  <div class="container boletin__inner reveal">
+    <p class="eyebrow">Lista de espera</p>
+    <h2 class="boletin__titulo">Que non che colla desprevido!</h2>
+    <p class="lead boletin__lead">
+      Déixanos o teu correo e avisarémoste do inicio da venda, das cartas que vaiamos desvelando e dos avances de produción. Sen barullo: un correo cando haxa algo que contar.
+    </p>
+
+    <div class="boletin__formulario">
+      {
+        idTally ? (
+          <iframe
+            data-tally-src={src}
+            loading="lazy"
+            width="100%"
+            height="240"
+            frameborder="0"
+            title="Formulario de suscripción a Lendario"
+          />
+        ) : (
+          <p class="boletin__pendente">
+            Formulario pendente: crea el form en Tally y añade <code>PUBLIC_TALLY_ID=tu_id</code> en
+            el archivo <code>.env</code> para que el embed se active.
+          </p>
+        )
+      }
+    </div>
+
+    <p class="boletin__legal">
+      Solo usamos o teu correo para avisarte de Lendario. Podes darte de baixa cando queiras.
+    </p>
+  </div>
+</section>
+
+{idTally && <script async src="https://tally.so/widgets/embed.js" />}
+
+<style>
+  .boletin {
+    background:
+      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--ouro-vello) 18%, transparent), transparent 70%),
+      var(--tinta);
+    border-top: 1px solid var(--borde);
+  }
+
+  .boletin__inner { max-width: 680px; margin-inline: auto; text-align: center; }
+  .boletin__titulo { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+  .boletin__lead { margin-inline: auto; }
+
+  .boletin__formulario {
+    margin-top: var(--space-8);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: var(--space-6);
+    background: color-mix(in oklab, var(--pergamino) 6%, transparent);
+  }
+
+  .boletin__pendente { font-size: var(--text-sm); color: var(--texto-2); }
+
+  .boletin__pendente code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    color: var(--ouro-claro);
+  }
+
+  .boletin__legal {
+    margin-top: var(--space-4);
+    font-size: var(--text-xs);
+    color: var(--texto-2);
+  }
+</style>

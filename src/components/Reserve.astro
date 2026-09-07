@@ -1,0 +1,122 @@
+---
+const inclui = [
+  '48 cartas ilustradas + 4 comodíns',
+  'Impresión con acabado grofrado, 310 g',
+  'Estuche con estampación en oro vello',
+  'Libriño de lendas con fontes e referencias',
+];
+---
+
+<section class="section reserva" id="reserva">
+  <div class="container reserva__grid">
+    <div class="reserva__texto reveal">
+      <p class="eyebrow">Edición fundacional</p>
+      <h2 class="reserva__titulo">Reserva a túa baralla antes do 30 de octubro</h2>
+      <p class="lead">
+        A primeira tirada é limitada e numerada. Ao reservar aseguras o teu exemplar e recibes aviso
+        o día que abramos a venda, sen nengún cargo por adiantado.
+      </p>
+
+      <ul class="reserva__lista" role="list">
+        {inclui.map((item) => (
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <aside class="reserva__ficha reveal">
+      <span class="reserva__etiqueta">Precio estimado</span>
+      <p class="reserva__prezo">24 €</p>
+      <p class="reserva__nota">Gastos de envío a península incluidos.</p>
+
+      <a class="btn btn--primario reserva__cta" href="#newsletter">Reservar exemplar</a>
+      <p class="reserva__aviso">
+        Reserva sen compromiso: escribirémosche co enlace de compra cando a tenda abra.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .reserva {
+    background:
+      radial-gradient(80% 60% at 15% 0%, color-mix(in oklab, var(--musgo) 22%, transparent), transparent 65%),
+      var(--tinta-suave);
+    border-top: 1px solid var(--borde);
+  }
+
+  .reserva__grid {
+    display: grid;
+    gap: clamp(var(--space-8), 5vw, var(--space-16));
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .reserva__grid { grid-template-columns: 1.35fr 1fr; }
+  }
+
+  .reserva__titulo { font-size: var(--text-xl); margin-bottom: var(--space-4); text-wrap: balance; }
+
+  .reserva__lista {
+    list-style: none;
+    margin: var(--space-8) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .reserva__lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+  }
+
+  .reserva__lista svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--ouro-claro);
+  }
+
+  .reserva__ficha {
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
+    background: color-mix(in oklab, var(--pergamino) 7%, transparent);
+    text-align: center;
+  }
+
+  .reserva__etiqueta {
+    font-size: var(--text-xs);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--texto-2);
+  }
+
+  .reserva__prezo {
+    font-family: var(--fonte-display);
+    font-size: var(--text-2xl);
+    color: var(--ouro-claro);
+    margin: var(--space-2) 0 0;
+  }
+
+  .reserva__nota { font-size: var(--text-sm); color: var(--texto-2); margin-top: var(--space-2); }
+
+  .reserva__cta { margin-top: var(--space-6); width: 100%; justify-content: center; }
+
+  .reserva__aviso {
+    font-size: var(--text-xs);
+    color: var(--texto-2);
+    margin-top: var(--space-4);
+    line-height: 1.5;
+  }
+</style>

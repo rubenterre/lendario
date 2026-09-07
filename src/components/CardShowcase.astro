@@ -1,0 +1,227 @@
+---
+import { Image } from 'astro:assets';
+
+import santaCompana from '../assets/images/02_comodin_santa_compana.webp';
+import rainaLupa from '../assets/images/10_oros_lupa.webp';
+import moura from '../assets/images/11_oros_moura.webp';
+import urco from '../assets/images/12_copas_urco.webp';
+
+const cartas = [
+  {
+    image: rainaLupa.src,
+    nome: 'A Raíña Lupa',
+    meta: 'Rei de ouros',
+    descricion: 'Poderosa raíña vinculada á lenda do Pico Sacro.',
+  },
+  {
+    image: santaCompana.src,
+    nome: 'A Santa Compaña',
+    meta: 'Comodín',
+    descricion: 'Procesión de ánimas que percorre de noite os camiños con luces acesas.',
+  },
+  {
+    image: moura.src,
+    nome: 'A Moura',
+    meta: 'Cabalo de ouros',
+    descricion: 'Gardiá de tesouros en castros e mámoas, ligada ás fontes e ás pedras antigas.',
+  },
+  {
+    image: urco.src,
+    nome: 'O Urco',
+    meta: 'Rei de copas',
+    descricion: 'Can escuro que emerxe do mar e anuncia a morte co seu ouveo.',
+  },
+];
+---
+
+<section class="section baralla" id="baralla" aria-labelledby="baralla-titulo">
+  <div class="container">
+    <div class="baralla__intro reveal">
+      <p class="eyebrow">O bestiario</p>
+
+      <h2 class="baralla__titulo" id="baralla-titulo">
+        Catro palos, un territorio encantado
+      </h2>
+
+      <p class="lead">
+        Lendario mantén a estrutura da baralla española —oros, copas, espadas e bastos—,
+        pero cada carta convértese nun ser do imaxinario galego, coa súa ilustración e unha
+        ficha breve sobre a súa lenda. Serve para xogar á brisca ou ao tute e, de paso,
+        descubrir quen anda pelo monte cando cae a noite.
+      </p>
+    </div>
+
+    <ul class="cartas" role="list">
+      {
+        cartas.map((carta, i) => (
+          <li class="carta reveal" style={`transition-delay: ${i * 70}ms`}>
+            <article class="carta__marco">
+              <div class="carta__cuerpo">
+                
+                {/* CARA DELANTERA */}
+                <div class="carta__cara carta__cara--delante">
+                  <div class="carta__arte">
+                    <img
+                      src={carta.image}
+                      alt={`Ilustración de ${carta.nome}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                </div>
+
+                {/* CARA TRASERA */}
+                <div class="carta__cara carta__cara--trasera">
+                  <div class="carta__reverso-contenido">
+                    <span>Lendario</span>
+                  </div>
+                </div>
+
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .baralla {
+    background: linear-gradient(
+      180deg,
+      var(--tinta),
+      var(--tinta-suave) 40%,
+      var(--tinta)
+    );
+    border-top: 1px solid var(--borde);
+  }
+
+  .baralla__intro {
+    max-width: 68ch;
+    margin-bottom: clamp(var(--space-8), 5vw, var(--space-16));
+  }
+
+  .baralla__titulo {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-xl);
+    text-wrap: balance;
+  }
+
+  .cartas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: clamp(var(--space-4), 2.5vw, var(--space-8));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* --- CARTA INTERFAZ 3D --- */
+  .carta__marco {
+    position: relative;
+    height: 100%;
+    perspective: 1000px; /* Perspectiva del entorno 3D */
+  }
+
+  .carta__cuerpo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 25rem; /* Asegura altura suficiente para el contenido absoluto */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .carta:hover .carta__cuerpo {
+    transform: rotateY(180deg);
+  }
+
+  .carta__cara {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* --- CARA FRONT --- */
+/*   .carta__cara--delante {
+    background: color-mix(in oklab, var(--pergamino) 6%, transparent);
+  } */
+
+  .carta__arte {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+
+  .carta__arte img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carta__pe {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .carta__meta {
+    margin: 0;
+    color: var(--ouro-claro);
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .carta__nome {
+    margin: 0.35rem 0 0.5rem;
+    font-size: var(--text-lg);
+  }
+
+  .carta__desc {
+    margin: 0;
+    color: var(--texto-2);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  /* --- CARA BACK (REVERSO) --- */
+  .carta__cara--trasera {
+    background: linear-gradient(135deg, var(--tinta), var(--granito));
+    color: var(--ouro-claro);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: var(--ouro-claro);
+  }
+
+  .carta__reverso-contenido {
+    font-family: serif;
+    font-size: var(--text-lg);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Accesibilidad y Reducción de movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .carta__cuerpo {
+      transition: none;
+    }
+    .carta:hover .carta__cuerpo {
+      transform: none;
+    }
+  }
+</style>
