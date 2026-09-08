@@ -115,6 +115,7 @@ const backgroundStyle = `url('${optimizada.src}')`;
 
   .hero__logo {
     max-width: min(82vw, 28rem);
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.4));
   }
 
   .hero__acciones {
@@ -397,5 +398,18 @@ const backgroundStyle = `url('${optimizada.src}')`;
   }
 }
 
+@media (min-width: 118.75rem) {
+  .hero__inner {
+    width: min(100% - 4rem, 78rem);
+    margin-inline: auto;
+    transform: translateX(
+      clamp(
+        2rem,
+        calc((100vw - 118.75rem) * 0.12),
+        6rem
+      )
+    );
+  }
+}
 
 </style>
