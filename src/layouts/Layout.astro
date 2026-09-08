@@ -6,12 +6,21 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonicalURL?: URL;
 }
 
 const {
-  title = 'Lendario · Baraja española de mitología gallega',
-  description = 'Lendario es una baraja española ilustrada que recoge los seres míticos de Galicia. 48 cartas, cuatro palos y un bestiario de niebla y granito. Lanzamiento: 30 de octubre de 2026.',
+  title = 'Lendario — A baralla da mitoloxía galega',
+  description = 'Descobre en cada carta a Galicia lendaria. Unha baralla española ilustrada inspirada nos mitos, lendas e seres da tradición galega.',
+  image = '/og-lendario.png',
+  canonicalURL = Astro.url,
 } = Astro.props;
+
+const siteName = 'Lendario';
+const imageURL = new URL(image, Astro.url);
+const pageTitle = title.includes('Lendario') ? title : `${title} | Lendario`;
+
 
 const url = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
 ---
@@ -24,15 +33,37 @@ const url = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : As
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+   <title>{pageTitle}</title>
+  <meta name="description" content={description} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={url} />
-    <meta property="og:image" content="/og.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <meta name="theme-color" content="#0a1116" />
+  <meta name="color-scheme" content="dark" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL.href} />
+  <meta property="og:image" content={imageURL.href} />
+  <meta property="og:image:secure_url" content={imageURL.href} />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Selo de Lendario cunha folla de carballo en ouro vello" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={imageURL.href} />
+  <meta name="twitter:image:alt" content="Selo de Lendario cunha folla de carballo en ouro vello" />
+
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   </head>

@@ -4,6 +4,9 @@ const lanzamento = '30 de octubre de 2026';
 
 import { getImage } from "astro:assets";
 import backgroundHero from './src/assets/images/Hero-breogan-heroe.webp';
+import logoLendario from './src/assets/images/Logo_lendario-2.webp';
+import Button from "./Button.astro";
+import { Image } from "astro:assets";
 
 const optimizada = await getImage({ src: backgroundHero, format: 'webp' });
 const backgroundStyle = `url('${optimizada.src}')`;
@@ -11,11 +14,24 @@ const backgroundStyle = `url('${optimizada.src}')`;
 
 <section class="hero">
 
+  <div class="hero__vento" aria-hidden="true">
+  <span class="hero__particulas hero__particulas--lentas"></span>
+  <span class="hero__particulas hero__particulas--medias"></span>
+  <span class="hero__particulas hero__particulas--rapidas"></span>
+  <span class="hero__particulas hero__particulas--rafagas"></span>
+</div>
+
   <div class="container hero__inner">
     <p class="eyebrow">Baralla tradicional · Mitoloxía galega</p>
-    <h1 class="hero__titulo">Lendario</h1>
+
+    <Image
+      src={logoLendario}
+      alt="Logo Lendario en pedra"
+      class="hero__logo"
+    />
+
     <p class="hero__claim">
-      Cuarenta e oito cartas para invocar aos seres que habitan a néboa, o granito e os
+      Corenta e oito cartas para invocar os seres que habitan a néboa, o granito e os
       camiños de Galicia.
     </p>
 
@@ -25,22 +41,87 @@ const backgroundStyle = `url('${optimizada.src}')`;
     </div>
 
     <div class="hero__acciones">
-      <a class="btn btn--primario" href="#reserva">Reservar a baralla</a>
-      <a class="btn btn--fantasma" href="#baraja">Ver as cartas</a>
+      <Button href="#reserva">Reservar a baralla</Button>
+      <Button href="#baraja">Ver as cartas</Button>
     </div>
   </div>
 </section>
 
+
 <style define:vars={{ backgroundStyle }}>
 .hero {
   position: relative;
-  min-height: min(92svh, 900px);
   display: grid;
+  min-height: min(92svh, 900px);
   align-items: center;
   justify-content: start;
   overflow: hidden;
-  background: var(--backgroundStyle) center/cover no-repeat;
+  isolation: isolate;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7, 13, 18, 0.96) 0%,
+      rgba(10, 21, 27, 0.90) 24%,
+      rgba(18, 35, 37, 0.68) 46%,
+      rgba(18, 35, 37, 0.26) 66%,
+      rgba(18, 35, 37, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(9, 14, 19, 0.38) 0%,
+      rgba(9, 14, 19, 0.06) 28%,
+      rgba(9, 14, 19, 0.12) 64%,
+      rgba(6, 10, 14, 0.68) 100%
+    ),
+    var(--backgroundStyle);
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+
+
+@media (max-width: 720px) {
+  .hero {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 14, 18, 0.18) 0%,
+        rgba(8, 14, 18, 0.34) 34%,
+        rgba(6, 11, 15, 0.88) 68%,
+        rgba(6, 11, 15, 0.98) 100%
+      ),
+      radial-gradient(
+        100% 68% at 50% 96%,
+        rgba(40, 68, 52, 0.22),
+        transparent 74%
+      ),
+      var(--backgroundStyle);
+
+    background-position: 70% center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .hero__particulas--lentas {
+    animation-duration: 24s;
+  }
+
+  .hero__particulas--rapidas {
+    display: none;
+  }
+
+  .hero__logo {
+    max-width: min(82vw, 28rem);
+  }
+
+  .hero__acciones {
+    width: 100%;
+  }
+}
+
 
 .hero__petroglifo {
   position: absolute;
@@ -61,20 +142,28 @@ const backgroundStyle = `url('${optimizada.src}')`;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__petroglifo {
+  .hero__petroglifo,
+  .hero__particulas {
     animation: none;
+  }
+
+  .hero__particulas {
+    display: none;
   }
 }
 
+
 .hero__inner {
   position: relative;
-  text-align: center;
-  padding-block: var(--space-24) var(--space-16);
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-6, 1.5rem);
+  padding-block: var(--space-24) var(--space-16);
+  text-align: center;
 }
+
 
 .hero__titulo {
   font-size: var(--text-hero);
@@ -83,6 +172,12 @@ const backgroundStyle = `url('${optimizada.src}')`;
   text-wrap: balance;
   margin: 0;
   font-weight: 400;
+}
+
+.hero__logo{
+  max-width: 36rem;
+  height: 100%;
+  width: 100%;
 }
 
 .eyebrow {
@@ -130,5 +225,177 @@ const backgroundStyle = `url('${optimizada.src}')`;
   gap: var(--space-4, 1rem);
   margin-top: var(--space-4);
 }
+
+
+/* Particulas */
+
+.hero__vento {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.hero__particulas {
+  position: absolute;
+  inset: -18% -25%;
+  width: 150%;
+  height: 136%;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation-name: vento-lendario;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  mix-blend-mode: screen;
+}
+
+
+.hero__particulas--lentas {
+  background-image:
+    radial-gradient(ellipse 24px 3px at 3% 20%, rgba(246, 225, 171, 0.46) 0 32%, transparent 75%),
+    radial-gradient(ellipse 14px 2px at 13% 66%, rgba(210, 226, 223, 0.34) 0 35%, transparent 75%),
+    radial-gradient(ellipse 28px 4px at 25% 42%, rgba(231, 195, 116, 0.38) 0 28%, transparent 76%),
+    radial-gradient(ellipse 17px 2px at 38% 79%, rgba(227, 232, 226, 0.34) 0 34%, transparent 75%),
+    radial-gradient(ellipse 24px 3px at 53% 17%, rgba(238, 203, 125, 0.38) 0 30%, transparent 76%),
+    radial-gradient(ellipse 16px 2px at 66% 56%, rgba(216, 230, 225, 0.31) 0 32%, transparent 75%),
+    radial-gradient(ellipse 26px 3px at 80% 34%, rgba(237, 201, 123, 0.36) 0 30%, transparent 76%),
+    radial-gradient(ellipse 18px 2px at 94% 76%, rgba(227, 232, 226, 0.32) 0 32%, transparent 75%);
+  filter: blur(0.65px);
+  animation-duration: 18s;
+  animation-delay: -11s;
+}
+
+.hero__particulas--medias {
+  background-image:
+    radial-gradient(ellipse 16px 2px at 2% 47%, rgba(255, 232, 178, 0.56) 0 34%, transparent 75%),
+    radial-gradient(ellipse 9px 1.5px at 9% 80%, rgba(226, 234, 230, 0.44) 0 34%, transparent 74%),
+    radial-gradient(ellipse 20px 2.5px at 18% 12%, rgba(244, 204, 119, 0.48) 0 32%, transparent 75%),
+    radial-gradient(ellipse 12px 1.5px at 31% 59%, rgba(238, 229, 196, 0.42) 0 34%, transparent 75%),
+    radial-gradient(ellipse 18px 2px at 46% 35%, rgba(244, 207, 121, 0.50) 0 32%, transparent 75%),
+    radial-gradient(ellipse 10px 1.5px at 59% 88%, rgba(229, 237, 232, 0.42) 0 34%, transparent 74%),
+    radial-gradient(ellipse 20px 2.5px at 72% 49%, rgba(247, 212, 133, 0.48) 0 32%, transparent 75%),
+    radial-gradient(ellipse 12px 1.5px at 87% 22%, rgba(228, 235, 232, 0.42) 0 34%, transparent 74%),
+    radial-gradient(ellipse 17px 2px at 96% 64%, rgba(242, 205, 125, 0.46) 0 32%, transparent 75%);
+  filter: blur(0.3px);
+  animation-duration: 11.5s;
+  animation-delay: -6.5s;
+}
+
+.hero__particulas--rapidas {
+  background-image:
+    radial-gradient(ellipse 27px 1.5px at 1% 70%, rgba(255, 230, 168, 0.66) 0 34%, transparent 76%),
+    radial-gradient(ellipse 15px 1.2px at 11% 29%, rgba(233, 239, 235, 0.52) 0 34%, transparent 75%),
+    radial-gradient(ellipse 23px 1.5px at 22% 90%, rgba(247, 203, 114, 0.56) 0 32%, transparent 76%),
+    radial-gradient(ellipse 31px 1.5px at 36% 22%, rgba(229, 238, 233, 0.48) 0 30%, transparent 75%),
+    radial-gradient(ellipse 18px 1.2px at 50% 68%, rgba(250, 214, 133, 0.58) 0 34%, transparent 76%),
+    radial-gradient(ellipse 27px 1.5px at 63% 9%, rgba(228, 238, 234, 0.46) 0 30%, transparent 75%),
+    radial-gradient(ellipse 20px 1.2px at 76% 54%, rgba(250, 210, 126, 0.55) 0 32%, transparent 76%),
+    radial-gradient(ellipse 30px 1.5px at 89% 31%, rgba(230, 237, 234, 0.48) 0 30%, transparent 75%),
+    radial-gradient(ellipse 19px 1.2px at 98% 82%, rgba(249, 213, 130, 0.52) 0 32%, transparent 76%);
+  filter: blur(0.1px);
+  animation-duration: 7.5s;
+  animation-delay: -3.5s;
+}
+
+
+@keyframes vento-lendario {
+  0% {
+    opacity: 0;
+    transform: translate3d(-28%, 2%, 0) skewX(-9deg);
+  }
+
+  10% {
+    opacity: 0.92;
+  }
+
+  48% {
+    opacity: 0.58;
+    transform: translate3d(18%, -2%, 0) skewX(-9deg);
+  }
+
+  86% {
+    opacity: 0.78;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(78%, 2%, 0) skewX(-9deg);
+  }
+}
+
+
+.hero__particulas--rafagas {
+  inset: -10% -30%;
+  width: 165%;
+  height: 120%;
+  opacity: 0;
+  filter: blur(0.7px);
+  animation-name: vento-rafagas;
+  animation-duration: 10.5s;
+  animation-delay: -5s;
+  animation-timing-function: ease-in-out;
+
+  background-image:
+    linear-gradient(
+      102deg,
+      transparent 0 8%,
+      rgba(239, 224, 183, 0.00) 10%,
+      rgba(239, 224, 183, 0.32) 16%,
+      rgba(239, 224, 183, 0.08) 27%,
+      transparent 36%
+    ),
+    linear-gradient(
+      102deg,
+      transparent 0 22%,
+      rgba(197, 216, 212, 0.00) 25%,
+      rgba(197, 216, 212, 0.25) 32%,
+      rgba(197, 216, 212, 0.05) 43%,
+      transparent 52%
+    ),
+    linear-gradient(
+      102deg,
+      transparent 0 48%,
+      rgba(229, 191, 109, 0.00) 50%,
+      rgba(229, 191, 109, 0.26) 56%,
+      rgba(229, 191, 109, 0.06) 68%,
+      transparent 75%
+    ),
+    linear-gradient(
+      102deg,
+      transparent 0 69%,
+      rgba(221, 230, 225, 0.00) 72%,
+      rgba(221, 230, 225, 0.23) 78%,
+      rgba(221, 230, 225, 0.04) 88%,
+      transparent 96%
+    );
+}
+
+@keyframes vento-rafagas {
+  0% {
+    opacity: 0;
+    transform: translate3d(-32%, 3%, 0) skewX(-10deg);
+  }
+
+  12% {
+    opacity: 0.72;
+  }
+
+  48% {
+    opacity: 0.44;
+  }
+
+  84% {
+    opacity: 0.64;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(70%, -2%, 0) skewX(-10deg);
+  }
+}
+
 
 </style>

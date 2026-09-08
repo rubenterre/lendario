@@ -4,12 +4,12 @@
 
  @font-face {
   font-family: Alice;
-  src: url(../../public/fonts/Alice-Regular.ttf);
+  src: url(/fonts/Alice-Regular.ttf);
  }
 
  @font-face {
   font-family: Martego;
-  src: url(../../public/fonts/Martego-Regular.woff2);
+  src: url(/fonts/Martego-Regular.woff2);
  }
 
 :root {
@@ -19,7 +19,7 @@
   --granito:        #5b5f5c;
   --granito-escuro: #3a3d3b;
   --ouro-vello:     #b0873c;
-  --ouro-claro:     #d8ae5e;
+  --ouro-claro:     #c69635;
   --musgo:          #56684a;
   --tinta:          #17150f;
   --tinta-suave:    #211e17;

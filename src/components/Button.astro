@@ -1,0 +1,291 @@
+---
+import ornamentLeft from '../assets/images/arrow_left.webp';
+import ornamentRight from '../assets/images/arrow_right.webp';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
+  target?: '_self' | '_blank';
+  rel?: string;
+  class?: string;
+  disabled?: boolean;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  target,
+  rel,
+  class: className = '',
+  disabled = false,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const baseClass = [
+  'lendario-button',
+  `lendario-button--${variant}`,
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const linkRel = target === '_blank' ? rel ?? 'noopener noreferrer' : rel;
+---
+
+
+<Tag
+  class={baseClass}
+  href={href}
+  type={href ? undefined : type}
+  target={href ? target : undefined}
+  rel={href ? linkRel : undefined}
+  disabled={!href && disabled ? true : undefined}
+>
+  <span class="lendario-button__ornamento lendario-button__ornamento--left" aria-hidden="true">
+    <img
+      src={ornamentLeft.src}
+      width={ornamentLeft.width}
+      height={ornamentLeft.height}
+      alt="ornamento"
+      decoding="async"
+    />
+  </span>
+
+  <span class="lendario-button__label">
+    <slot />
+  </span>
+
+  <span class="lendario-button__ornamento lendario-button__ornamento--right" aria-hidden="true">
+    <img
+      src={ornamentRight.src}
+      width={ornamentRight.width}
+      height={ornamentRight.height}
+      alt="ornamento"
+      decoding="async"
+    />
+  </span>
+</Tag>
+
+
+<style>
+  .lendario-button {
+    --button-bg: var(--ouro-claro, #d7a743);
+    --button-bg-hover: #e4bb5f;
+    --button-ink: var(--tinta, #121a1c);
+    --button-height: 3.5rem;
+    --ornament-width: 2.625rem;
+    --cut-size: 0.85rem;
+
+    position: relative;
+    display: inline-grid;
+    min-height: var(--button-height);
+    padding: 0 1.25rem;
+    place-items: center;
+    overflow: hidden;
+    border: 0;
+    color: var(--button-ink);
+    background: var(--button-bg);
+   --button-height: 3.5rem;
+  --button-radius: calc(var(--button-height) / 2);
+
+  min-height: var(--button-height);
+  border-radius: var(--button-radius);
+  clip-path: inset(0 round var(--button-radius));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 246, 211, 0.4),
+      inset 0 -2px 0 rgba(74, 47, 19, 0.16),
+      0 8px 20px rgba(0, 0, 0, 0.2);
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    isolation: isolate;
+    transition:
+      background-color 0.25s var(--ease, ease),
+      color 0.25s var(--ease, ease),
+      transform 0.25s var(--ease, ease),
+      box-shadow 0.25s var(--ease, ease);
+  }
+
+
+/*   .lendario-button::before {
+    position: absolute;
+    inset: 3px;
+    z-index: -1;
+    border: 1px solid rgba(62, 43, 24, 0.2);
+    content: '';
+    clip-path: polygon(
+      calc(var(--cut-size) - 0.2rem) 0,
+      calc(100% - var(--cut-size) + 0.2rem) 0,
+      100% calc(var(--cut-size) - 0.2rem),
+      100% calc(100% - var(--cut-size) + 0.2rem),
+      calc(100% - var(--cut-size) + 0.2rem) 100%,
+      calc(var(--cut-size) - 0.2rem) 100%,
+      0 calc(100% - var(--cut-size) + 0.2rem),
+      0 calc(var(--cut-size) - 0.2rem)
+    );
+    opacity: 0.55;
+  } */
+
+  .lendario-button__label {
+    position: relative;
+    z-index: 1;
+    padding: 0 calc(var(--ornament-width) - 0.6rem);
+    text-shadow: 0 1px 0 rgba(255, 246, 211, 0.22);
+  }
+
+  .lendario-button__ornamento {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    width: var(--ornament-width);
+    height: 100%;
+    color: color-mix(in oklab, var(--button-ink) 92%, transparent);
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition:
+      color 0.25s var(--ease, ease),
+      transform 0.25s var(--ease, ease);
+  }
+
+  .lendario-button__ornamento img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+
+  .lendario-button__ornamento--left {
+    left: 0.35rem;
+  }
+
+  .lendario-button__ornamento--right {
+    right: 0.35rem;
+    transform: translateY(-50%) scaleX(-1);
+  }
+
+  .lendario-button:hover{
+    background-color: var(--pergamino);
+    transition: all .5s ease;
+  }
+
+
+/*   .lendario-button:hover:not(:disabled) {
+    --button-bg: var(--button-bg-hover);
+
+    color: #101719;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 226, 0.55),
+      inset 0 -2px 0 rgba(74, 47, 19, 0.2),
+      0 12px 28px rgba(0, 0, 0, 0.28);
+    transform: translateY(-2px);
+  } */
+
+/*   .lendario-button:hover:not(:disabled) .lendario-button__ornamento--left {
+    transform: translateY(-50%) translateX(-2px);
+  }
+
+  .lendario-button:hover:not(:disabled) .lendario-button__ornamento--right {
+    transform: translateY(-50%) scaleX(-1) translateX(-2px);
+  }
+
+  .lendario-button:active:not(:disabled) {
+    transform: translateY(0);
+  } */
+
+  .lendario-button:focus-visible {
+    outline: 2px solid var(--pergamino, #f2dfb4);
+    outline-offset: 4px;
+  }
+
+  .lendario-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .lendario-button--secondary {
+    --button-bg: color-mix(in oklab, var(--granito, #4c504d) 78%, var(--tinta, #121a1c));
+    --button-bg-hover: color-mix(in oklab, var(--musgo, #506b4a) 46%, var(--granito, #4c504d));
+    --button-ink: var(--pergamino, #f2dfb4);
+
+    border: 1px solid color-mix(in oklab, var(--ouro-claro, #d7a743) 55%, transparent);
+  }
+
+  .lendario-button--secondary::before {
+    border-color: color-mix(in oklab, var(--pergamino, #f2dfb4) 25%, transparent);
+  }
+
+  .lendario-button--secondary:hover:not(:disabled) {
+    color: var(--pergamino, #f2dfb4);
+  }
+
+  .lendario-button__ornamento {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: var(--ornament-width);
+  height: calc(100% - 0.35rem);
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.lendario-button__ornamento--left {
+  left: 0;
+}
+
+.lendario-button__ornamento--right {
+  right: 0;
+}
+
+.lendario-button__ornamento img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+
+  @media (max-width: 420px) {
+    .lendario-button {
+      --button-height: 3.25rem;
+      --ornament-width: 2.25rem;
+
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    .lendario-button__label {
+      padding-inline: 1.3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lendario-button,
+    .lendario-button__ornamento {
+      transition: none;
+    }
+
+    .lendario-button:hover:not(:disabled) {
+      transform: none;
+    }
+
+    .lendario-button:hover:not(:disabled) .lendario-button__ornamento--left,
+    .lendario-button:hover:not(:disabled) .lendario-button__ornamento--right {
+      transform: translateY(-50%);
+    }
+
+    .lendario-button:hover:not(:disabled) .lendario-button__ornamento--right {
+      transform: translateY(-50%) scaleX(-1);
+    }
+  }
+</style>
