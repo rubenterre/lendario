@@ -3,14 +3,13 @@
 const lanzamento = '30 de octubre de 2026';
 
 import { getImage } from "astro:assets";
-import backgroundHero from './src/assets/images/hero_lendario_ith.webp';
+import backgroundHero from './src/assets/images/Hero-breogan-heroe.webp';
 
 const optimizada = await getImage({ src: backgroundHero, format: 'webp' });
 const backgroundStyle = `url('${optimizada.src}')`;
 ---
 
 <section class="hero">
-  <div class="hero__neboa" aria-hidden="true"></div>
 
   <div class="container hero__inner">
     <p class="eyebrow">Baralla tradicional · Mitoloxía galega</p>
@@ -38,17 +37,9 @@ const backgroundStyle = `url('${optimizada.src}')`;
   min-height: min(92svh, 900px);
   display: grid;
   align-items: center;
+  justify-content: start;
   overflow: hidden;
   background: var(--backgroundStyle) center/cover no-repeat;
-}
-
-.hero__neboa {
-  position: absolute;
-  inset: auto 0 -10% 0;
-  height: 55%;
-  background: radial-gradient(60% 100% at 50% 100%, color-mix(in oklab, var(--pergamino) 16%, transparent), transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
 }
 
 .hero__petroglifo {

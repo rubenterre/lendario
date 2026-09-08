@@ -1,4 +1,8 @@
 ---
+
+import Swiper from 'swiper';
+import { EffectCards, Keyboard, A11y } from 'swiper/modules';
+
 import { Image } from 'astro:assets';
 
 import santaCompana from '../assets/images/02_comodin_santa_compana.webp';
@@ -34,7 +38,7 @@ const cartas = [
 ];
 ---
 
-<section class="section baralla" id="baralla" aria-labelledby="baralla-titulo">
+<section class="section baralla" id="baraja" aria-labelledby="baralla-titulo">
   <div class="container">
     <div class="baralla__intro reveal">
       <p class="eyebrow">O bestiario</p>
@@ -47,19 +51,20 @@ const cartas = [
         Lendario mantén a estrutura da baralla española —oros, copas, espadas e bastos—,
         pero cada carta convértese nun ser do imaxinario galego, coa súa ilustración e unha
         ficha breve sobre a súa lenda. Serve para xogar á brisca ou ao tute e, de paso,
-        descubrir quen anda pelo monte cando cae a noite.
+        descubrir quen anda polo monte cando cae a noite.
       </p>
     </div>
 
-    <ul class="cartas" role="list">
-      {
-        cartas.map((carta, i) => (
-          <li class="carta reveal" style={`transition-delay: ${i * 70}ms`}>
-            <article class="carta__marco">
-              <div class="carta__cuerpo">
-                
-                {/* CARA DELANTERA */}
-                <div class="carta__cara carta__cara--delante">
+    <div class="bestiario-slider reveal">
+      <div
+        class="swiper bestiario-swiper"
+        aria-label="Cartas de mostra da baralla Lendario"
+      >
+        <div class="swiper-wrapper">
+          {
+            cartas.map((carta) => (
+              <article class="swiper-slide carta">
+                <div class="carta__marco">
                   <div class="carta__arte">
                     <img
                       src={carta.image}
@@ -68,24 +73,79 @@ const cartas = [
                       decoding="async"
                     />
                   </div>
-
                 </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
 
-                {/* CARA TRASERA */}
-                <div class="carta__cara carta__cara--trasera">
-                  <div class="carta__reverso-contenido">
-                    <span>Lendario</span>
-                  </div>
-                </div>
+      <div class="bestiario-slider__controles">
+        <button
+          class="bestiario-slider__boton bestiario-slider__anterior"
+          type="button"
+          aria-label="Ver a carta anterior"
+        >
+          <span aria-hidden="true">←</span>
+        </button>
 
-              </div>
-            </article>
-          </li>
-        ))
-      }
-    </ul>
+        <p class="bestiario-slider__axuda" aria-hidden="true">
+          Arrastra para descubrir as cartas
+        </p>
+
+        <button
+          class="bestiario-slider__boton bestiario-slider__seguinte"
+          type="button"
+          aria-label="Ver a carta seguinte"
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  import Swiper from 'swiper';
+  import { EffectCards, Keyboard, A11y } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/effect-cards';
+
+  document.querySelectorAll('.bestiario-swiper').forEach((element) => {
+    const previousButton = element
+      .closest('.bestiario-slider')
+      ?.querySelector('.bestiario-slider__anterior');
+
+    const nextButton = element
+      .closest('.bestiario-slider')
+      ?.querySelector('.bestiario-slider__seguinte');
+
+    const swiper = new Swiper(element, {
+      modules: [EffectCards, Keyboard, A11y],
+      effect: 'cards',
+      cardsEffect: {
+        perSlideOffset: 11,
+        perSlideRotate: 1.5,
+        rotate: true,
+        slideShadows: true,
+      },
+      slidesPerView: 1,
+      grabCursor: true,
+      speed: 650,
+      threshold: 8,
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      a11y: {
+        enabled: true,
+      },
+    });
+
+    previousButton?.addEventListener('click', () => swiper.slidePrev());
+    nextButton?.addEventListener('click', () => swiper.slideNext());
+  });
+</script>
 
 <style>
   .baralla {
@@ -99,14 +159,22 @@ const cartas = [
   }
 
   .baralla__intro {
-    max-width: 68ch;
+    
     margin-bottom: clamp(var(--space-8), 5vw, var(--space-16));
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .baralla__titulo {
     margin-bottom: var(--space-4);
     font-size: var(--text-xl);
     text-wrap: balance;
+  }
+
+  .lead{
+    text-align: center;
   }
 
   .cartas {
@@ -116,6 +184,94 @@ const cartas = [
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+    .bestiario-swiper {
+    width: min(100%, 320px);
+    overflow: visible;
+  }
+
+    .bestiario-swiper :global(.swiper-wrapper) {
+    align-items: stretch;
+  }
+
+  .bestiario-swiper :global(.swiper-slide) {
+    display: flex;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .carta {
+    cursor: grab;
+    user-select: none;
+  }
+
+  .carta:active {
+    cursor: grabbing;
+  }
+
+  .bestiario-slider__controles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .bestiario-slider__boton {
+    display: grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+    place-items: center;
+    border: 1px solid var(--borde);
+    border-radius: 50%;
+    color: var(--pergamino);
+    background: color-mix(in oklab, var(--granito) 70%, var(--tinta));
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      transform 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      color 0.25s var(--ease),
+      background 0.25s var(--ease);
+  }
+
+  .bestiario-slider__boton:hover {
+    transform: translateY(-2px);
+    border-color: var(--ouro-claro);
+    color: var(--ouro-claro);
+    background: color-mix(in oklab, var(--musgo) 32%, var(--granito));
+  }
+
+  .bestiario-slider__boton:focus-visible {
+    outline: 2px solid var(--ouro-claro);
+    outline-offset: 4px;
+  }
+
+  .bestiario-slider__axuda {
+    margin: 0;
+    color: var(--texto-2);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  @media (min-width: 720px) {
+    .bestiario-swiper {
+      width: 350px;
+    }
+
+    .bestiario-slider {
+      gap: var(--space-8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carta,
+    .bestiario-slider__boton {
+      transition: none;
+    }
   }
 
   /* --- CARTA INTERFAZ 3D --- */
