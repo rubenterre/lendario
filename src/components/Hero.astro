@@ -1,14 +1,13 @@
 ---
 
-const lanzamento = '30 de octubre de 2026';
-import { getImage, Image } from 'astro:assets';
+const lanzamento = '30 de outubro de 2026';
+
+import { Image } from 'astro:assets';
 import backgroundHero from '../assets/images/hero-breogan-heroe.webp';
-import logoLendario from '../assets/images/logo_lendario-2.webp';
-import Button from "./Button.astro";
+import logoLendario from '../assets/images/logo-lendario-2.webp';
+import Button from './Button.astro';
 
-
-const optimizada = await getImage({ src: backgroundHero, format: 'webp' });
-const backgroundStyle = `url('${optimizada.src}')`;
+const backgroundStyle = `url("${backgroundHero.src}")`;
 ---
 
 <section class="hero">

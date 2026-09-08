@@ -4,12 +4,12 @@
 
  @font-face {
   font-family: Alice;
-  src: url(/fonts/Alice-Regular.ttf);
+  src: url(./fonts/Alice-Regular.ttf);
  }
 
  @font-face {
   font-family: Martego;
-  src: url(/fonts/Martego-Regular.woff2);
+  src: url(./fonts/Martego-Regular.woff2);
  }
 
 :root {
