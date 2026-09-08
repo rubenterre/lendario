@@ -1,12 +1,11 @@
 ---
 
 const lanzamento = '30 de octubre de 2026';
-
-import { getImage } from "astro:assets";
-import backgroundHero from './src/assets/images/Hero-breogan-heroe.webp';
-import logoLendario from './src/assets/images/Logo_lendario-2.webp';
+import { getImage, Image } from 'astro:assets';
+import backgroundHero from '../assets/images/hero-breogan-heroe.webp';
+import logoLendario from '../assets/images/logo_lendario-2.webp';
 import Button from "./Button.astro";
-import { Image } from "astro:assets";
+
 
 const optimizada = await getImage({ src: backgroundHero, format: 'webp' });
 const backgroundStyle = `url('${optimizada.src}')`;
