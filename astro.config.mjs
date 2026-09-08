@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://lendariogame.netlify.app',
+  site: 'https://lendario.rubenterre.me',
 });
