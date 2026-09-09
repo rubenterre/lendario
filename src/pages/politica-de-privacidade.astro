@@ -1,0 +1,592 @@
+---
+// src/pages/politica-de-privacidade.astro
+
+import Layout from '../layouts/Layout.astro';
+
+const dataActualizacion = '9 de setembro de 2026';
+
+const responsable = {
+  nome: 'Rubén Terré',
+  /* nif: '36177347A', */
+  enderezo: 'Santiago de Compostela',
+  correo: 'info@rubenterre.com',
+};
+
+const encargados = [
+  {
+    nome: 'Netlify, Inc.',
+    finalidade: 'Aloxamento e distribución da web (hosting)',
+    zona: 'Unión Europea / Estados Unidos (transferencia internacional)',
+  },
+  {
+    nome: 'Tally',
+    finalidade: 'Xestión da lista de espera e envío de comunicacións por correo',
+    zona: 'UE',
+  },
+/*   {
+    nome: 'Google Analytics',
+    finalidade: 'Análise de uso e rendemento da web',
+    zona: 'Fora da UE',
+  }, */
+];
+---
+
+<Layout
+  title="Política de privacidade"
+  description="Política de privacidade de Lendario: como tratamos os teus datos persoais conforme ao RGPD."
+>
+  <section class="section politica">
+    <div class="container politica__inner">
+      <header class="politica__cabeceira reveal">
+        <p class="eyebrow">Información legal</p>
+        <h1 class="politica__titulo">Política de privacidade</h1>
+        <p class="politica__actualizado">
+          Última actualización: <strong>{dataActualizacion}</strong>
+        </p>
+        <p class="lead">
+          En Lendario respectamos a túa privacidade e queremos que saibas, de
+          forma clara e sinxela, que datos recollemos, para que os usamos e
+          que dereitos tes sobre eles.
+        </p>
+      </header>
+
+      <nav class="politica__indice reveal" aria-label="Índice da política de privacidade">
+        <p class="politica__indice-titulo">Contido</p>
+        <ol>
+          <li><a href="#responsable">1. Quen é o responsable do tratamento</a></li>
+          <li><a href="#datos">2. Que datos recollemos</a></li>
+          <li><a href="#finalidades">3. Para que usamos os teus datos</a></li>
+          <li><a href="#base-legal">4. Cal é a base legal do tratamento</a></li>
+          <li><a href="#destinatarios">5. A quen comunicamos os teus datos</a></li>
+          <li><a href="#transferencias">6. Transferencias internacionais</a></li>
+          <li><a href="#conservacion">7. Canto tempo gardamos os teus datos</a></li>
+          <li><a href="#dereitos">8. Cales son os teus dereitos</a></li>
+          <li><a href="#retirar-consentimento">9. Como retirar o teu consentimento</a></li>
+          <li><a href="#reclamacion">10. Como reclamar ante a autoridade de control</a></li>
+          <li><a href="#seguridade">11. Seguridade dos teus datos</a></li>
+          <li><a href="#cookies">12. Cookies e tecnoloxías similares</a></li>
+          <li><a href="#menores">13. Menores de idade</a></li>
+          <li><a href="#cambios">14. Cambios nesta política</a></li>
+          <li><a href="#contacto">15. Contacto</a></li>
+        </ol>
+      </nav>
+
+      <div class="politica__contido reveal">
+        <section id="responsable" class="politica__seccion">
+          <h2>1. Quen é o responsable do tratamento</h2>
+          <p>
+            O responsable do tratamento dos datos persoais recollidos a
+            través deste sitio web é:
+          </p>
+          <ul class="politica__lista-datos">
+            <li><strong>Nome / Razón social:</strong> {responsable.nome}</li>
+            <!-- <li><strong>NIF/CIF:</strong> {responsable.nif}</li> -->
+            <li><strong>Enderezo:</strong> {responsable.enderezo}</li>
+            <li><strong>Correo de contacto:</strong> {responsable.correo}</li>
+          </ul>
+          <p>
+            Non contamos cun Delegado de Protección de Datos (DPO) por non
+            ser obrigatorio segundo o volume e a natureza do tratamento que
+            realizamos. Calquera consulta sobre protección de datos pode
+            dirixirse ao correo indicado arriba.
+          </p>
+        </section>
+
+        <section id="datos" class="politica__seccion">
+          <h2>2. Que datos recollemos</h2>
+          <p>
+            Recollemos unicamente os datos que nos facilitas de forma
+            voluntaria a través dos formularios da web, principalmente o
+            formulario de lista de espera para a reserva da baralla Lendario:
+          </p>
+          <ul>
+            <li>Nome (opcional).</li>
+            <li>Enderezo de correo electrónico.</li>
+            <li>Zona ou país de envío indicado no formulario.</li>
+            <li>
+              Preferencias sobre a edición e os complementos do produto, se
+              as indicas.
+            </li>
+            <li>
+              Comentarios ou texto libre que decidas escribir nos campos
+              opcionais.
+            </li>
+          </ul>
+          <p>
+            Tamén podemos recoller de forma automática datos técnicos de
+            navegación (enderezo IP, tipo de navegador, páxinas visitadas)
+            unicamente se activas ferramentas de analítica ou medición, tal
+            como se detalla no apartado de cookies.
+          </p>
+          <p>
+            Non solicitamos categorías especiais de datos (saúde, orixe
+            étnica, opinións políticas, relixión, orientación sexual, etc.)
+            nin datos de menores de idade.
+          </p>
+        </section>
+
+        <section id="finalidades" class="politica__seccion">
+          <h2>3. Para que usamos os teus datos</h2>
+          <p>Tratamos os teus datos persoais coas seguintes finalidades:</p>
+          <ul>
+            <li>
+              Xestionar a túa inscrición na lista de espera para a reserva
+              da baralla Lendario.
+            </li>
+            <li>
+              Enviarche información sobre a apertura de reservas, novidades
+              do proxecto e a primeira edición, sempre que teñas dado o teu
+              consentimento expreso para iso.
+            </li>
+            <li>
+              Responder ás consultas que nos fagas a través do correo
+              electrónico de contacto.
+            </li>
+            <li>
+              Analizar de forma agregada o interese no proxecto (por
+              exemplo, cantas persoas prefiren unha edición ou outra), sen
+              que isto implique decisións automatizadas individuais.
+            </li>
+            <li>
+              Cumprir obrigas legais que nos poidan resultar aplicables.
+            </li>
+          </ul>
+          <p>
+            Non utilizamos os teus datos para elaborar perfís nin para tomar
+            decisións automatizadas que produzan efectos xurídicos ou te
+            afecten de forma significativa.
+          </p>
+        </section>
+
+        <section id="base-legal" class="politica__seccion">
+          <h2>4. Cal é a base legal do tratamento</h2>
+          <p>A base legal que lexitima o tratamento dos teus datos é:</p>
+          <ul>
+            <li>
+              <strong>O teu consentimento</strong> (artigo 6.1.a RGPD), para
+              enviarche comunicacións comerciais sobre Lendario e a apertura
+              de reservas. Podes retirar este consentimento en calquera
+              momento, tal como se explica no apartado 9.
+            </li>
+            <li>
+              <strong>O interese lexítimo</strong> (artigo 6.1.f RGPD), para
+              analizar de forma agregada e anonimizada o interese no
+              proxecto e mellorar a nosa proposta de produto.
+            </li>
+            <li>
+              <strong>O cumprimento de obrigas legais</strong> (artigo 6.1.c
+              RGPD), cando así o esixa a normativa aplicable.
+            </li>
+          </ul>
+        </section>
+
+        <section id="destinatarios" class="politica__seccion">
+          <h2>5. A quen comunicamos os teus datos</h2>
+          <p>
+            Non vendemos nin cedemos os teus datos persoais a terceiros con
+            fins comerciais propios. Únicamente compartimos datos cos
+            seguintes encargados do tratamento, que nos prestan servizos
+            técnicos necesarios para o funcionamento da web:
+          </p>
+          <div class="politica__tabla-wrapper">
+            <table class="politica__tabla">
+              <thead>
+                <tr>
+                  <th scope="col">Provedor</th>
+                  <th scope="col">Finalidade</th>
+                  <th scope="col">Localización</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  encargados.map((encargado) => (
+                    <tr>
+                      <td>{encargado.nome}</td>
+                      <td>{encargado.finalidade}</td>
+                      <td>{encargado.zona}</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Con cada un destes provedores mantemos, cando é necesario, un
+            contrato de encargo do tratamento conforme ao artigo 28 do RGPD.
+          </p>
+        </section>
+
+        <section id="transferencias" class="politica__seccion">
+          <h2>6. Transferencias internacionais</h2>
+          <p>
+            Algúns dos provedores indicados no apartado anterior poden estar
+            localizados ou procesar datos fóra do Espazo Económico Europeo
+            (por exemplo, en Estados Unidos). Nestes casos, garantimos que a
+            transferencia conta cunhas garantías adecuadas, como:
+          </p>
+          <ul>
+            <li>
+              Decisións de adecuación da Comisión Europea, cando existan.
+            </li>
+            <li>
+              Cláusulas contractuais tipo aprobadas pola Comisión Europea.
+            </li>
+            <li>
+              Mecanismos equivalentes recoñecidos polo RGPD, como o marco de
+              privacidade de datos UE-EUA (Data Privacy Framework), cando o
+              provedor estea adherido a el.
+            </li>
+          </ul>
+          <p>
+            Podes solicitarnos máis información sobre estas garantías
+            escribindo ao correo de contacto indicado no apartado 1.
+          </p>
+        </section>
+
+        <section id="conservacion" class="politica__seccion">
+          <h2>7. Canto tempo gardamos os teus datos</h2>
+          <p>
+            Conservamos os teus datos persoais mentres sexan necesarios para
+            a finalidade para a que os recollemos e, en todo caso, seguindo
+            estes criterios:
+          </p>
+          <ul>
+            <li>
+              Os datos da lista de espera consérvanse mentres non retires o
+              teu consentimento ou solicites a súa supresión, e como máximo
+              ata <strong>24 meses</strong> desde a
+              túa última interacción coas nosas comunicacións.
+            </li>
+            <li>
+              Os datos das consultas por correo electrónico consérvanse
+              durante o tempo necesario para xestionar a túa solicitude e,
+              posteriormente, o prazo mínimo esixido pola normativa
+              aplicable.
+            </li>
+            <li>
+              Quando a lei esixa un prazo de conservación específico (por
+              exemplo, por obrigas fiscais ou contables), os datos
+              conservaranse durante ese prazo legal.
+            </li>
+          </ul>
+        </section>
+
+        <section id="dereitos" class="politica__seccion">
+          <h2>8. Cales son os teus dereitos</h2>
+          <p>
+            En relación cos teus datos persoais, podes exercer en calquera
+            momento os seguintes dereitos, recoñecidos polo RGPD:
+          </p>
+          <ul>
+            <li>
+              <strong>Acceso:</strong> saber que datos teus tratamos.
+            </li>
+            <li>
+              <strong>Rectificación:</strong> corrixir datos inexactos ou
+              incompletos.
+            </li>
+            <li>
+              <strong>Supresión:</strong> solicitar que eliminemos os teus
+              datos cando xa non sexan necesarios.
+            </li>
+            <li>
+              <strong>Limitación do tratamento:</strong> solicitar que
+              deixemos de tratar os teus datos en determinadas circunstancias,
+              conservándoos unicamente.
+            </li>
+            <li>
+              <strong>Oposición:</strong> opoñerte a un tratamento baseado no
+              noso interese lexítimo.
+            </li>
+            <li>
+              <strong>Portabilidade:</strong> recibir os teus datos nun
+              formato estruturado e de uso común, ou solicitar que os
+              transmitamos a outro responsable.
+            </li>
+          </ul>
+          <p>
+            Para exercer calquera destes dereitos, escríbenos ao correo{' '}
+            <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a>{' '}
+            indicando o dereito que queres exercer e achegando unha copia
+            dun documento que acredite a túa identidade.
+          </p>
+        </section>
+
+        <section id="retirar-consentimento" class="politica__seccion">
+          <h2>9. Como retirar o teu consentimento</h2>
+          <p>
+            Se nos deches o teu consentimento para recibir comunicacións
+            sobre Lendario, podes retiralo en calquera momento, sen que iso
+            afecte á licitude do tratamento realizado con anterioridade á
+            retirada. Podes facelo de dúas formas:
+          </p>
+          <ul>
+            <li>
+              Utilizando a ligazón de baixa incluída en calquera correo que
+              te enviemos.
+            </li>
+            <li>
+              Escribindo directamente ao correo{' '}
+              <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a>.
+            </li>
+          </ul>
+        </section>
+
+        <section id="reclamacion" class="politica__seccion">
+          <h2>10. Como reclamar ante a autoridade de control</h2>
+          <p>
+            Se consideras que o tratamento dos teus datos persoais non se
+            axusta á normativa vixente, tes dereito a presentar unha
+            reclamación ante a autoridade de control competente. En España,
+            a autoridade competente é a{' '}
+            <strong>Axencia Española de Protección de Datos (AEPD)</strong>,
+            a través do seu sitio web{' '}
+            <a
+              href="https://www.aepd.es"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.aepd.es
+            </a>
+            .
+          </p>
+        </section>
+
+        <section id="seguridade" class="politica__seccion">
+          <h2>11. Seguridade dos teus datos</h2>
+          <p>
+            Aplicamos medidas técnicas e organizativas adecuadas para
+            protexer os teus datos persoais fronte a accesos non autorizados,
+            perda, alteración ou destrución. Entre outras medidas:
+          </p>
+          <ul>
+            <li>Uso de conexións cifradas (HTTPS) en todo o sitio web.</li>
+            <li>
+              Acceso restrinxido aos datos unicamente ás persoas que
+              necesitan tratalos para as finalidades descritas.
+            </li>
+            <li>
+              Selección de provedores que ofrecen garantías axeitadas de
+              seguridade e cumprimento normativo.
+            </li>
+          </ul>
+        </section>
+
+        <section id="cookies" class="politica__seccion">
+          <h2>12. Cookies e tecnoloxías similares</h2>
+  
+          <ul>
+            <li>
+              <strong>Cookies técnicas:</strong> necesarias para o
+              funcionamento básico do sitio. Non requiren consentimento.
+            </li>
+<!--             <li>
+              <strong>Cookies analíticas:</strong> Google
+              Analytics para medir a audiencia do sitio.
+            </li> -->
+          </ul>
+        </section>
+
+        <section id="menores" class="politica__seccion">
+          <h2>13. Menores de idade</h2>
+          <p>
+            Este sitio web e os seus formularios están dirixidos a persoas
+            maiores de <strong>16 anos</strong>. Non recollemos de forma
+            consciente datos de menores desa idade sen o consentimento dos
+            seus proxenitores ou titores legais. Se detectamos que se
+            recolleron datos dun menor sen ese consentimento, procederemos á
+            súa eliminación.
+          </p>
+        </section>
+
+        <section id="cambios" class="politica__seccion">
+          <h2>14. Cambios nesta política</h2>
+          <p>
+            Podemos actualizar esta política de privacidade para adaptala a
+            novidades lexislativas, xurisprudenciais ou a cambios no
+            funcionamento da web. Publicaremos calquera cambio relevante
+            nesta mesma páxina, indicando a data de última actualización na
+            parte superior.
+          </p>
+        </section>
+
+        <section id="contacto" class="politica__seccion">
+          <h2>15. Contacto</h2>
+          <p>
+            Para calquera dúbida sobre esta política de privacidade ou sobre
+            o tratamento dos teus datos persoais, podes escribirnos a:
+          </p>
+          <p class="politica__contacto-destacado">
+            <a href={`mailto:${responsable.correo}`}>{responsable.correo}</a>
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .politica {
+    background: linear-gradient(180deg, var(--tinta), var(--tinta-suave) 40%, var(--tinta));
+    border-top: 1px solid var(--borde);
+  }
+
+  .politica__inner {
+    display: grid;
+    gap: clamp(var(--space-8), 5vw, var(--space-16));
+    padding-block: clamp(var(--space-16), 8vw, var(--space-24));
+  }
+
+  .politica__cabeceira {
+    max-width: 68ch;
+  }
+
+  .politica__titulo {
+    margin: var(--space-3) 0 var(--space-2);
+    font-size: var(--text-xl);
+    text-wrap: balance;
+  }
+
+  .politica__actualizado {
+    margin-bottom: var(--space-4);
+    color: var(--texto-2);
+    font-size: var(--text-sm);
+  }
+
+  .politica__indice {
+    padding: var(--space-6);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: color-mix(in oklab, var(--pergamino) 6%, transparent);
+  }
+
+  .politica__indice-titulo {
+    margin: 0 0 var(--space-3);
+    color: var(--ouro-claro);
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .politica__indice ol {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 1;
+  }
+
+  .politica__indice a {
+    color: var(--texto-2);
+    text-decoration: none;
+    transition: color 0.25s var(--ease);
+  }
+
+  .politica__indice a:hover,
+  .politica__indice a:focus-visible {
+    color: var(--ouro-claro);
+  }
+
+  @media (min-width: 780px) {
+    .politica__indice ol {
+      columns: 2;
+      column-gap: var(--space-8);
+    }
+  }
+
+  .politica__contido {
+    display: grid;
+    gap: clamp(var(--space-10), 6vw, var(--space-16));
+    max-width: 74ch;
+  }
+
+  .politica__seccion h2 {
+    margin: 0 0 var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--borde);
+    font-size: var(--text-lg);
+    scroll-margin-top: 6rem;
+  }
+
+  .politica__seccion p,
+  .politica__seccion li {
+    color: var(--texto-2);
+    font-size: var(--text-sm);
+    line-height: 1.65;
+  }
+
+  .politica__seccion ul {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-2) 0 var(--space-4);
+    padding-left: 1.2rem;
+  }
+
+  .politica__seccion a {
+    color: var(--ouro-claro);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .politica__lista-datos {
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--pergamino) 5%, transparent);
+    list-style: none;
+    padding-left: var(--space-5);
+  }
+
+  .politica__lista-datos li {
+    color: var(--texto-1, var(--pergamino));
+  }
+
+  .politica__tabla-wrapper {
+    overflow-x: auto;
+    margin: var(--space-3) 0 var(--space-5);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+  }
+
+  .politica__tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .politica__tabla th,
+  .politica__tabla td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .politica__tabla thead th {
+    color: var(--ouro-claro);
+    background: color-mix(in oklab, var(--granito) 60%, var(--tinta));
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .politica__tabla tbody tr:nth-child(odd) {
+    background: color-mix(in oklab, var(--pergamino) 4%, transparent);
+  }
+
+  .politica__tabla tbody td {
+    color: var(--texto-2);
+  }
+
+  .politica__contacto-destacado {
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid color-mix(in oklab, var(--ouro-claro) 45%, transparent);
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--musgo) 12%, transparent);
+    font-size: var(--text-md);
+  }
+
+  .politica__contacto-destacado a {
+    color: var(--pergamino);
+    font-weight: 700;
+  }
+</style>
