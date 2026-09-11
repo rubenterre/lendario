@@ -1,10 +1,13 @@
 ---
 const ano = new Date().getFullYear();
+import logo from "../assets/lendario_logo_dark_tagline_mini.webp";
+
 ---
 
 <footer class="rodape">
   <div class="container rodape__inner">
-    <p class="rodape__marca">Lendario</p>
+    <!-- <p class="rodape__marca">Lendario</p> -->
+     <img src={logo.src} alt="Logo de Lendario" class="rodape__logo" width="200" height="100">
     <p class="rodape__nota">
       Baralla tradicional inspirada na mitoloxía galega · Santiago de Compostela
     </p>
@@ -26,6 +29,10 @@ const ano = new Date().getFullYear();
   }
 
   .rodape__inner { display: grid; gap: var(--space-3); text-align: center; }
+
+  .rodape__logo{
+    margin: 0 auto;
+  }
 
   .rodape__marca {
     font-family: var(--fonte-display);
