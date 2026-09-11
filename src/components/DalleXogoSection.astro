@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import logoDalle from '../assets/images/logo-sen-eslogan.webp';
+import fondoDalleXogo from '../assets/images/fondo_dalle_xogo.png';
+
+const backgroundDalle = `url("${fondoDalleXogo.src}")`;
+
+
+export interface Props {
+  eventName?: string;
+  startDate?: string;
+  endDate?: string;
+  location?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  eventName = "Dálle Xogo",
+  startDate = "26 de setembro",
+  endDate = "27 de setembro",
+  location = "Área Central Outlet, Santiago de Compostela",
+  ctaLabel = "Máis información",
+  ctaHref = "https://dallexogo.es",
+} = Astro.props;
+---
+
+<section class="dalle-xogo" aria-labelledby="dalle-xogo-heading">
+  <div class="dalle-xogo__frame">
+<!--     <div class="dalle-xogo__seal" aria-hidden="true">
+      <span class="dalle-xogo__seal-ring"></span>
+    </div> -->
+
+<!--     <Image
+      src={logoDalle}
+      alt="Logo Lendario en pedra"
+      class="dalle-xogo__logo"
+    /> -->
+
+    <p class="dalle-xogo__eyebrow">Vémonos en</p>
+
+    <h2 id="dalle-xogo-heading" class="dalle-xogo__event">
+      {eventName}
+    </h2>
+
+    <p class="dalle-xogo__dates">
+      <span class="dalle-xogo__day">{startDate}</span>
+      <span class="dalle-xogo__separator" aria-hidden="true">&mdash;</span>
+      <span class="dalle-xogo__day">{endDate}</span>
+    </p>
+
+    {location && <p class="dalle-xogo__location">{location}</p>}
+
+    <p class="dalle-xogo__copy">
+      Lendario estará presente en <strong>{eventName}</strong>. Ven coñecer
+      a baralla en persoa, ver as cartas de preto e falar cara a cara co
+      seu autor antes de que estea dispoñible para todos.
+    </p>
+
+    {
+      ctaHref !== "#" && (
+        <a class="dalle-xogo__cta" href={ctaHref}>
+          {ctaLabel}
+        </a>
+      )
+    }
+  </div>
+</section>
+
+<style define:vars={{backgroundDalle}}>
+  .dalle-xogo {
+    position: relative;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+    background: radial-gradient(
+        circle at 50% 0%,
+        rgba(196, 164, 92, 0.12),
+        transparent 60%
+      ),
+      #2c2a24;
+    color: #e9dfc7;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .dalle-xogo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+        circle,
+        rgba(233, 223, 199, 0.06) 1px,
+        transparent 1.5px
+      );
+    background-size: 22px 22px;
+    opacity: 0.5;
+  }
+
+  .dalle-xogo__frame {
+    position: relative;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid rgba(196, 164, 92, 0.45);
+    border-radius: 0.25rem;
+    background: var(backgroundDalle);
+
+  }
+
+  .dalle-xogo__logo{
+    margin: 0 auto;
+    max-width: 8rem;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .dalle-xogo__eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c4a45c;
+  }
+
+  .dalle-xogo__event {
+    margin: 0 0 0.75rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    letter-spacing: 0.02em;
+    color: #f2e9d2;
+  }
+
+  .dalle-xogo__dates {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    color: #d8b96a;
+  }
+
+  .dalle-xogo__day {
+    display: inline-block;
+  }
+
+  .dalle-xogo__separator {
+    margin: 0 0.5em;
+    color: rgba(216, 185, 106, 0.6);
+  }
+
+  .dalle-xogo__location {
+    margin: 0 0 1.25rem;
+    font-size: 0.95rem;
+    color: rgba(233, 223, 199, 0.75);
+  }
+
+  .dalle-xogo__copy {
+    max-width: 32rem;
+    margin: 0 auto 1.75rem;
+    line-height: 1.6;
+    color: rgba(233, 223, 199, 0.9);
+  }
+
+  .dalle-xogo__cta {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 1px solid #c4a45c;
+    border-radius: 0.25rem;
+    color: #f2e9d2;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dalle-xogo__cta:hover,
+  .dalle-xogo__cta:focus-visible {
+    background-color: #c4a45c;
+    color: #2c2a24;
+  }
+</style>
