@@ -2,10 +2,10 @@
 import Button from "./Button.astro";
 
 const inclui = [
-  '48 cartas ilustradas + 4 comodíns',
-  'Impresión con acabado grofrado, 310 g',
-  'Estuche con estampación en oro vello',
-  'Libriño de lendas con fontes e referencias',
+  "48 cartas ilustradas + 4 comodíns",
+  "Impresión con acabado grofrado, 310 g",
+  "Estuche con estampación en oro vello",
+  "Libriño de lendas con fontes e referencias",
 ];
 ---
 
@@ -13,21 +13,32 @@ const inclui = [
   <div class="container reserva__grid">
     <div class="reserva__texto reveal">
       <p class="eyebrow">Edición fundacional</p>
-      <h2 class="reserva__titulo">Reserva a túa baralla antes do 30 de octubro</h2>
+      <h2 class="reserva__titulo">Sé o primeiro en telo nas túas máns</h2>
       <p class="lead">
-        A primeira tirada é limitada e numerada. Ao reservar aseguras o teu exemplar e recibes aviso
-        o día que abramos a venda, sen nengún cargo por adiantado.
+        Lendario aínda non está á venda. Deixa o teu correo e serás dos
+        primeiros en sabelo cando a baralla estea dispoñible, ademais de recibir
+        un adianto das cartas antes que ninguén.
       </p>
 
       <ul class="reserva__lista" role="list">
-        {inclui.map((item) => (
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-            <span>{item}</span>
-          </li>
-        ))}
+        {
+          inclui.map((item) => (
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
@@ -36,9 +47,9 @@ const inclui = [
       <p class="reserva__prezo">24 €</p>
       <p class="reserva__nota">Gastos de envío a península incluidos.</p>
 
-      <Button href="#newsletter">Reservar exemplar</Button>
+      <Button href="#newsletter">Avísame do lanzamento</Button>
       <p class="reserva__aviso">
-        Reserva sen compromiso: escribirémosche co enlace de compra cando a tenda abra.
+        Escribirémosche cando a teñamos novidades.
       </p>
     </aside>
   </div>
@@ -47,7 +58,11 @@ const inclui = [
 <style>
   .reserva {
     background:
-      radial-gradient(80% 60% at 15% 0%, color-mix(in oklab, var(--musgo) 22%, transparent), transparent 65%),
+      radial-gradient(
+        80% 60% at 15% 0%,
+        color-mix(in oklab, var(--musgo) 22%, transparent),
+        transparent 65%
+      ),
       var(--tinta-suave);
     border-top: 1px solid var(--borde);
   }
@@ -60,10 +75,16 @@ const inclui = [
   }
 
   @media (min-width: 900px) {
-    .reserva__grid { grid-template-columns: 1.35fr 1fr; }
+    .reserva__grid {
+      grid-template-columns: 1.35fr 1fr;
+    }
   }
 
-  .reserva__titulo { font-size: var(--text-xl); margin-bottom: var(--space-4); text-wrap: balance; }
+  .reserva__titulo {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    text-wrap: balance;
+  }
 
   .reserva__lista {
     list-style: none;
@@ -111,9 +132,17 @@ const inclui = [
     margin: var(--space-2) 0 0;
   }
 
-  .reserva__nota { font-size: var(--text-sm); color: var(--texto-2); margin-top: var(--space-2); }
+  .reserva__nota {
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+    margin-top: var(--space-2);
+  }
 
-  .reserva__cta { margin-top: var(--space-6); width: 100%; justify-content: center; }
+  .reserva__cta {
+    margin-top: var(--space-6);
+    width: 100%;
+    justify-content: center;
+  }
 
   .reserva__aviso {
     font-size: var(--text-xs);

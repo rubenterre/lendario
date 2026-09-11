@@ -1,23 +1,33 @@
 ---
 const enlaces = [
-  { href: '#baraja', texto: 'A baralla' },
-  { href: '#reserva', texto: 'Reserva' },
-  { href: '#newsletter', texto: 'Novidades' },
+  { target: "_self", href: "#baraja", texto: "A baralla" },
+  { target: "_self", href: "#reserva", texto: "Reserva" },
+  { target: "_self", href: "#newsletter", texto: "Novidades" },
+  {
+    target: "_blank",
+    href: "https://www.redbubble.com/es/shop/ap/183734601?ref=studio-promote",
+    texto: "Tenda",
+  },
 ];
 
-import logo from '../assets/logo_lendario.webp';
-
+import logo from "../assets/logo_lendario.webp";
 ---
 
 <header class="cabeceira">
   <div class="container cabeceira__inner">
     <a class="marca" href="/" aria-label="Lendario · inicio">
-      <img src={logo.src} alt="Logo de Lendario" width="70px" height="70px"> 
+      <img src={logo.src} alt="Logo de Lendario" width="70px" height="70px" />
       <span class="marca__texto">Lendario</span>
     </a>
 
     <nav class="nav" aria-label="Principal">
-      {enlaces.map((e) => <a href={e.href}>{e.texto}</a>)}
+      {
+        enlaces.map((e) => (
+          <a href={e.href} target={e.target}>
+            {e.texto}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>
@@ -25,16 +35,22 @@ import logo from '../assets/logo_lendario.webp';
 <header class="cabeceira-mobil">
   <div class="container cabeceira__inner-mobil">
     <a class="marca marca-mobil" href="/" aria-label="Lendario · inicio">
-<!--       <img src={logo.src} alt="Logo de Lendario" width="70px" height="70px"> 
- -->      <span class="marca__texto">Lendario</span>
+      <!--       <img src={logo.src} alt="Logo de Lendario" width="70px" height="70px"> 
+ -->
+      <span class="marca__texto">Lendario</span>
     </a>
 
     <nav class="nav nav-mobil" aria-label="Principal">
-      {enlaces.map((e) => <a href={e.href}>{e.texto}</a>)}
+      {
+        enlaces.map((e) => (
+          <a href={e.href} target={e.target}>
+            {e.texto}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>
-
 
 <style>
   .cabeceira {
@@ -46,7 +62,7 @@ import logo from '../assets/logo_lendario.webp';
     border-bottom: 1px solid var(--borde);
   }
 
-  .cabeceira-mobil{
+  .cabeceira-mobil {
     display: none;
   }
 
@@ -66,12 +82,16 @@ import logo from '../assets/logo_lendario.webp';
     color: var(--pergamino);
   }
 
-  .marca__logo { width: 28px; height: 28px; color: var(--ouro-claro); }
+  .marca__logo {
+    width: 28px;
+    height: 28px;
+    color: var(--ouro-claro);
+  }
 
   .marca__texto {
     font-family: var(--fonte-display);
     font-size: 2rem;
-   /*  letter-spacing: 0.14em; */
+    /*  letter-spacing: 0.14em; */
   }
 
   .nav {
@@ -87,20 +107,22 @@ import logo from '../assets/logo_lendario.webp';
     transition: color 0.25s var(--ease);
   }
 
-  .nav a:hover { color: var(--ouro-claro); }
-
-  @media (max-width: 560px) {
-    .nav a:first-child { display: none; }
+  .nav a:hover {
+    color: var(--ouro-claro);
   }
 
+  @media (max-width: 560px) {
+    .nav a:first-child {
+      display: none;
+    }
+  }
 
-  @media (max-width: 370px) {
-
-    .cabeceira{
+  @media (max-width: 440px) {
+    .cabeceira {
       display: none;
     }
 
-    .cabeceira-mobil{
+    .cabeceira-mobil {
       display: flex;
       justify-items: center;
       align-items: center;
@@ -108,17 +130,16 @@ import logo from '../assets/logo_lendario.webp';
       height: fit-content;
     }
 
-    .marca-mobil{
+    .marca-mobil {
       display: flex;
       justify-content: center;
     }
 
-    .nav-mobil{
-      padding: .5rem 0px;
+    .nav-mobil {
+      padding: 0.5rem 0px;
       display: flex;
       justify-content: center;
       gap: 2rem;
     }
-    
   }
 </style>
