@@ -1,0 +1,203 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const latestPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("gl-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+---
+
+<section class="latest-posts">
+  <div class="latest-posts__header">
+    <h2 class="latest-posts__heading">Últimas do blog</h2>
+    <a class="latest-posts__link" href="/blog/">Ver todo o blog</a>
+  </div>
+
+  <ul class="latest-posts__grid">
+    {latestPosts.map((post) => (
+      <li class="post-card">
+        <a class="post-card__link" href={`/blog/${post.id}/`}>
+          <div class="post-card__image-wrap">
+            {post.data.heroImage && (
+              <Image
+                class="post-card__image"
+                src={post.data.heroImage}
+                alt={post.data.heroAlt ?? post.data.title}
+                widths={[320, 640]}
+                sizes="(min-width: 60rem) 20rem, 90vw"
+                loading="lazy"
+              />
+            )}
+          </div>
+<div class="post-card__body">
+  <h3 class="post-card__title">{post.data.title}</h3>
+  <div class="post-card__footer">
+    <time class="post-card__date" datetime={post.data.pubDate.toISOString()}>
+      {formatDate(post.data.pubDate)}
+    </time>
+    <span class="post-card__cta">
+      Ver máis
+      <svg class="post-card__cta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path
+          d="M3 8h10M9 4l4 4-4 4"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+  </div>
+</div>
+
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .latest-posts {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .latest-posts__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .latest-posts__heading {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    color: var(--ouro-claro);
+  }
+
+  .latest-posts__link {
+    font-size: 0.9rem;
+    color: var(--ouro-vello);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .latest-posts__link:hover,
+  .latest-posts__link:focus-visible {
+    border-color: var(--ouro-vello);
+  }
+
+  .latest-posts__grid {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  }
+
+  .post-card {
+    background: #ffffff;
+    border: 1px solid rgba(138, 107, 47, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(44, 42, 36, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .post-card:hover,
+  .post-card:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(44, 42, 36, 0.12);
+  }
+
+  .post-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-card__image-wrap {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #2c2a24;
+  }
+
+  .post-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .post-card__body {
+    padding: 1.1rem 1.25rem 1.35rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .post-card__title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    color: #2c2a24;
+    flex: 1;
+  }
+
+  .post-card__date {
+    font-size: 0.85rem;
+    color: #8a6b2f;
+  }
+
+  .post-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.post-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ouro-vello);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.post-card__cta-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.post-card:hover .post-card__cta,
+.post-card:focus-within .post-card__cta {
+  color: #8a3b46;
+}
+
+.post-card:hover .post-card__cta-icon,
+.post-card:focus-within .post-card__cta-icon {
+  transform: translateX(3px);
+}
+
+</style>
