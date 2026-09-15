@@ -190,7 +190,18 @@ const backgroundStyle = `url("${backgroundHero.src}")`;
   -webkit-box-decoration-break: clone; /* Compatibilidad para Safari/Chrome */
   box-decoration-break: clone;
   font-weight: 700;
+
+  white-space: nowrap;
 }
+
+@media (max-width: 400px) {
+  .eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    padding-inline: 0.5em;
+  }
+}
+
 
 .hero__claim {
   max-width: 54ch;
