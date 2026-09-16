@@ -1,0 +1,272 @@
+---
+const idTally = import.meta.env.PUBLIC_TALLY_ID ?? "";
+const src = `https://tally.so/embed/${idTally}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+
+const idVimeo = import.meta.env.PUBLIC_VIMEO_TRAILER_ID ?? "";
+const vimeoSrc = `https://player.vimeo.com/video/${idVimeo}?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media;`;
+
+const inclue = [
+  "48 cartas ilustradas + 4 comodíns",
+  "Impresión con acabado grofrado, 310 g",
+  "Estoxo con estampación en ouro vello",
+  "Libriño de lendas con fontes e referencias",
+];
+---
+
+<section class="section reserva" id="reserva">
+  <div class="container reserva__columna">
+    <div class="reserva__intro reveal">
+      <p class="eyebrow">Edición fundacional</p>
+      <h2 class="reserva__titulo">Sé o primeiro en telo nas túas máns</h2>
+      <p class="lead">
+        Lendario aínda non está á venda. Deixa o teu correo e serás dos
+        primeiros en sabelo cando a baralla estea dispoñible, ademais de recibir
+        un adianto das cartas antes que ninguén.
+      </p>
+    </div>
+
+ <div class="reserva__video reveal" id="reserva-video">
+      {
+        idVimeo ? (
+          <iframe
+            src={vimeoSrc}
+            loading="lazy"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="Trailer de Lendario - Naipes de Galicia"
+          />
+        ) : (
+          <p class="reserva__video-pendente">
+            Trailer pendente: sobe o vídeo a Vimeo e engade{" "}
+            <code>PUBLIC_VIMEO_TRAILER_ID=teu_id</code> no ficheiro{" "}
+            <code>.env</code>.
+          </p>
+        )
+      }
+    </div>
+
+    <div class="reserva__ficha reveal" id="reserva-ficha">
+      <p class="reserva__prezo">Súscríbete!</p>
+      <p class="reserva__nota">Recibe o noso boletín de novidades.</p>
+      <div class="reserva__micro-form">
+        {
+          idTally ? (
+            <iframe
+              data-tally-src={src}
+              loading="eager"
+              width="100%"
+              height="120"
+              frameborder="0"
+              title="Avísame do lanzamento de Lendario"
+            />
+          ) : (
+            <p class="reserva__pendente">
+              Formulario pendente: crea o form en Tally e engade{" "}
+              <code>PUBLIC_TALLY_ID=teu_id</code> no ficheiro <code>.env</code>.
+            </p>
+          )
+        }
+
+        <noscript>
+          <p class="reserva__fallback">
+            Activa JavaScript ou escríbenos a <a
+              href="mailto:info@rubenterre.com">info@rubenterre.com</a
+            > para reservar a túa praza.
+          </p>
+        </noscript>
+      </div>
+
+      <p class="reserva__aviso">
+        Sen barullo, sen spam. Un correo cando haxa novidades reais.
+      </p>
+    </div>
+  </div>
+</section>
+
+{idTally && <script async src="https://tally.so/widgets/embed.js" />}
+
+<script>
+  // Fallback visible si el iframe de Tally no carga en un tiempo razonable
+  // (bloqueadores de anuncios, ITP de Safari, extensiones de privacidad, etc.)
+  const ficha = document.getElementById("reserva-ficha");
+  const iframeTally = ficha?.querySelector("iframe");
+
+  if (iframeTally) {
+    let loaded = false;
+    iframeTally.addEventListener(
+      "load",
+      () => {
+        loaded = true;
+      },
+      { once: true },
+    );
+
+    setTimeout(() => {
+      if (!loaded) {
+        const aviso = document.createElement("p");
+        aviso.className = "reserva__fallback";
+        aviso.innerHTML =
+          '¿Non ves o formulario? Pode ser un bloqueador do navegador. Escríbenos a <a href="mailto:ola@lendario.gal">ola@lendario.gal</a> e engadímoste á lista igualmente.';
+        iframeTally.insertAdjacentElement("afterend", aviso);
+      }
+    }, 4000);
+  }
+</script>
+
+<style>
+  .reserva {
+    background:
+      radial-gradient(
+        80% 60% at 15% 0%,
+        color-mix(in oklab, var(--musgo) 22%, transparent),
+        transparent 65%
+      ),
+      var(--tinta-suave);
+    border-top: 1px solid var(--borde);
+  }
+
+  .reserva__columna {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(var(--space-8), 5vw, var(--space-12));
+    max-width: 860px;
+    margin-inline: auto;
+  }
+
+  .reserva__intro {
+    text-align: center;
+    max-width: 62ch;
+  }
+
+  .reserva__titulo {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    text-wrap: balance;
+  }
+
+  .reserva__video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    box-shadow: 0 0 16px 1px color-mix(in oklab, var(--pergamino) 35%, transparent);
+  }
+
+  .player .vp-video-wrapper .vp-video{
+    background-color: transparent!important;
+  }
+
+  .reserva__video iframe {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+  }
+
+   .reserva__video-pendente {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: var(--space-6);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+  }
+
+  .reserva__video-pendente code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    color: var(--ouro-claro);
+  }
+ 
+  .reserva__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 46ch;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .reserva__lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+  }
+
+  .reserva__lista svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--ouro-claro);
+  }
+
+  .reserva__ficha {
+    width: 100%;
+    max-width: 860px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: clamp(var(--space-6), 3vw, var(--space-8));
+    background: color-mix(in oklab, var(--pergamino) 7%, transparent);
+    text-align: center;
+  }
+
+  .reserva__prezo {
+    font-family: var(--fonte-display);
+    font-size: var(--text-2xl);
+    color: var(--ouro-claro);
+    margin: 0;
+  }
+
+  .reserva__nota {
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+    margin-top: var(--space-2);
+  }
+
+  .reserva__micro-form {
+    margin-top: var(--space-6);
+    min-height: 3.5rem;
+  }
+
+  .reserva__pendente {
+    font-size: var(--text-sm);
+    color: var(--texto-2);
+  }
+
+  .reserva__pendente code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    color: var(--ouro-claro);
+  }
+
+  .reserva__fallback {
+    margin-top: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--texto-2);
+    line-height: 1.5;
+  }
+
+  .reserva__fallback a {
+    color: var(--ouro-claro);
+  }
+
+  .reserva__aviso {
+    font-size: var(--text-xs);
+    color: var(--texto-2);
+    margin-top: var(--space-4);
+    line-height: 1.5;
+  }
+</style>
