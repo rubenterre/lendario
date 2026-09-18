@@ -37,15 +37,11 @@ const idBrevo = import.meta.env.PUBLIC_BREVO_FORM_URL ?? '';
       }
     </div>
 
-
-<!--   <p class="reserva__prezo">Súscríbete!</p>
-  <p class="reserva__nota">Recibe o noso boletín de novidades.</p> -->
-
     {idBrevo ? (
       <iframe width="100%" height="850" src={idBrevo} frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
     ) : (
       <p class="reserva__pendente">
-        Formulario pendente: engade <code>PUBLIC_BREVO_FORM_URL</code> no <code>.env</code>.
+        Formulario pendente
       </p>
     )}
 
