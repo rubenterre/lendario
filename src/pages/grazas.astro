@@ -1,0 +1,159 @@
+---
+// src/pages/grazas.astro
+// Páxina de confirmación tras a suscrición ao boletín de Lendario.
+// Configura esta URL (/grazas) como redirección de éxito no teu formulario
+// de Tally: Settings → After submission → Redirect to a URL.
+
+import Layout from '../layouts/Layout.astro';
+
+const redesSociais = [
+  { nome: 'Instagram', href: 'https://www.instagram.com/lendario_naipes/' },
+  { nome: 'Vimeo', href: 'https://vimeo.com/user263512063?fl=pp&fe=sh' },
+];
+---
+
+<Layout
+  title="Grazas por suscribirte"
+  description="A túa suscrición ao boletín de Lendario confirmouse. En breve recibirás novidades sobre a baralla e os seres da mitoloxía galega."
+>
+  <section class="section grazas" id="grazas">
+    <div class="container grazas__inner reveal">
+      <p class="eyebrow">Suscrición confirmada</p>
+
+      <h1 class="grazas__titulo">Xa formas parte da lenda!</h1>
+
+      <p class="lead grazas__lead">
+        Grazas por unirte á lista de espera de Lendario. Gardamos o teu
+        correo e avisarémoste en canto haxa novidades: avances das cartas,
+        o inicio da produción e o momento en que poidas facerte coa túa
+        baralla.
+      </p>
+
+      <div class="grazas__detalles">
+        <div class="grazas__item">
+          <span class="grazas__numero">01</span>
+          <p>Revisa a túa caixa de entrada: enviarémoste un correo de
+          benvida nos próximos minutos.</p>
+        </div>
+        <div class="grazas__item">
+          <span class="grazas__numero">02</span>
+          <p>Se non o atopas, bota unha ollada á carpeta de spam ou
+          promocións e marca o remitente como seguro.</p>
+        </div>
+        <div class="grazas__item">
+          <span class="grazas__numero">03</span>
+          <p>Enviarémoste só correos con contido real: sen barullo, sen
+          spam. Podes darte de baixa cando queiras.</p>
+        </div>
+      </div>
+
+      <div class="grazas__accions">
+        <a href="/" class="btn btn--primario">Volver ao inicio</a>
+        <a href="/blog" class="btn btn--fantasma">Ler o blog de Lendario</a>
+      </div>
+
+      <nav class="grazas__sociais" aria-label="Redes sociais de Lendario">
+        <p class="grazas__sociais-titulo">Sígue o proceso de creación</p>
+        <div class="grazas__sociais-ligazons">
+          {redesSociais.map((rede) => (
+            <a href={rede.href} target="_blank" rel="noopener noreferrer">{rede.nome}</a>
+          ))}
+        </div>
+      </nav>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .grazas {
+    background:
+      radial-gradient(70% 60% at 50% 0%, color-mix(in oklab, var(--ouro-vello) 18%, transparent), transparent 70%),
+      var(--tinta);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .grazas__inner {
+    max-width: 720px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .grazas__titulo {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-6);
+    text-wrap: balance;
+  }
+
+  .grazas__lead {
+    margin-inline: auto;
+    margin-bottom: var(--space-12);
+  }
+
+  .grazas__detalles {
+    display: grid;
+    gap: var(--space-6);
+    text-align: left;
+    margin-bottom: var(--space-12);
+    padding: var(--space-8);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: color-mix(in oklab, var(--pergamino) 6%, transparent);
+  }
+
+  .grazas__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: var(--space-4);
+  }
+
+  .grazas__item p { margin: 0; color: var(--texto-2); font-size: var(--text-sm); }
+
+  .grazas__numero {
+    font-family: var(--fonte-display);
+    font-size: var(--text-lg);
+    color: var(--ouro-claro);
+    line-height: 1;
+  }
+
+  .grazas__accions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .grazas__sociais-titulo {
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--texto-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .grazas__sociais-ligazons {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .grazas__sociais-ligazons a {
+    color: var(--texto);
+    text-decoration: none;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 2px;
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+
+  .grazas__sociais-ligazons a:hover {
+    color: var(--ouro-claro);
+    border-color: var(--ouro-claro);
+  }
+
+  @media (max-width: 640px) {
+    .grazas__detalles { padding: var(--space-6); }
+  }
+</style>
