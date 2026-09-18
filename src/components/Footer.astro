@@ -1,6 +1,8 @@
 ---
 const ano = new Date().getFullYear();
 import logo from "../assets/lendario_logo_dark_tagline_mini.webp";
+import instagram from "../assets/socials/instagram_icon.webp";
+import vimeo from "../assets/socials/vimeo_icon.webp";
 
 ---
 
@@ -17,6 +19,14 @@ import logo from "../assets/lendario_logo_dark_tagline_mini.webp";
       <a href="/politica-de-privacidade">Política de privacidade</a>
       <a href="https://rubenterre.me" target="_blank">Contacto</a>
     </nav>
+    <div class="rodape__sociais">
+      <a href="https://www.instagram.com/lendario_naipes/" target="_blank" rel="noopener noreferrer">
+      <img src={instagram.src} alt="Icono de Instagram" width="25" height="25">
+      </a>
+      <a href="https://vimeo.com/user263512063?fl=pp&fe=sh" target="_blank" rel="noopener noreferrer">
+      <img src={vimeo.src} alt="Icono de Vimeo" width="25" height="25">
+      </a>
+    </div>
     <p class="rodape__copy">© {ano} Lendario. Tódolos dereitos reservados. Deseñado e desenvolto por <a href="https://rubenterre.me">Rubén Terré</a></p>
   </div>
 </footer>
@@ -59,4 +69,16 @@ import logo from "../assets/lendario_logo_dark_tagline_mini.webp";
   }
 
   .rodape__ligazons a:hover { color: var(--ouro-claro); }
+
+  .rodape__sociais{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0px;
+  }
+
+  .rodape__sociais a{
+    text-decoration: none;
+  }
 </style>
