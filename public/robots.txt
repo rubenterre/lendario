@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lendario.rubenterre.me/sitemap-index.xml
