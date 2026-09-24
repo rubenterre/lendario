@@ -1,0 +1,60 @@
+---
+
+---
+
+<section class="section flipbook" id="flipbook" aria-labelledby="flipbook-titulo">
+  <div class="container">
+    <div class="flipbook__intro">
+      <p class="eyebrow">Flipbook</p>
+
+      <h2 class="flipbook__titulo" id="flipbook-titulo">
+        Bota un ollo ao Grimario de Lendario
+      </h2>
+
+      <p class="lead">
+        No grimario atoparás toda a información que precisas sobre as lendas, os
+        mitos e os seres mitolóxicos galegos presentes nas cartas. Podes
+        consultalo sempre que o necesites, xa que inclúe un glosario de termos.
+        Ademais, se xa estás cansado dos xogos tradicionais, tamén che
+        propoñemos outras mecánicas de xogo.
+      </p>
+    </div>
+
+    <div class="flipbook-slider">
+        <iframe allowfullscreen allow="autoplay; fullscreen; clipboard-write" scrolling="no" style="width: 100%; height: 620px; border: 1px solid lightgray;" src="https://heyzine.com/flip-book/3804688558.html"></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+     .flipbook {
+     background: linear-gradient(
+      180deg,
+      var(--tinta),
+      var(--ouro-vello) 80%,
+      var(--tinta)
+    );
+
+    border-top: 1px solid var(--borde);
+  }
+
+  .flipbook__intro {
+    
+    margin-bottom: clamp(var(--space-8), 5vw, var(--space-16));
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flipbook__titulo {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-xl);
+    text-wrap: balance;
+    text-align: center;
+  }
+
+  .lead{
+    text-align: center;
+  }
+</style>
