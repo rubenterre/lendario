@@ -1,5 +1,7 @@
 ---
-const lanzamento = '30 de outubro de 2026';
+/* const lanzamento = '30 de outubro de 2026';
+ */
+const lanzamento = 'PRÓXIMAMENTE';
 
 import { Image } from 'astro:assets';
 import backgroundHero from '../assets/images/hero-breogan-heroe.webp';
@@ -40,7 +42,7 @@ const backgroundStyle = `url("${backgroundHero.src}")`;
 
     <div class="hero__acciones">
       <Button href="#edicion">Avísame do lanzamento</Button>
-      <Button href="#baralla">Ver as cartas</Button>
+      <Button href="#baralla" variant='secondary'>Ver as cartas</Button>
     </div>
   </div>
 </section>
